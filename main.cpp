@@ -17,42 +17,50 @@ int exercise_no4_2();
 int exercise_no4_3();
 int exercise_no4_4();
 int exercise_no4_5();
+int exercise_no5_1();
+int exercise_no5_2();
 bool Prime(unsigned int nNumber);
 
 int main()
 {
-    cout << "Exercises for course by Karol Kuczmarski (Xion):" << endl;
-    cout << "==========================================" << endl;
-    cout << "1. Exercise 2.1. - Waiting for a character after writing a line of text" << endl;
-    cout << "2. Exercise 2.2. - Writing first name and last name in a full sentence" << endl;
-    cout << "3. Exercise 2.3. - Multiplying three number" << endl;
-    cout << "4. Exercise 3.1. - Classifying given number" << endl;
-    cout << "5. Exercise 3.2. - Numbers from 1 to 100 and their squares" << endl;
-    cout << "6. Exercise 3.3. - Guess the number game" << endl;
-    cout << "7. Exercise 4.1. - Span of int and unsigned int" << endl;
-    cout << "8. Exercise 4.2. - Sizeof for new names of short int and long int" << endl;
-    cout << "9. Exercise 4.3. - ANSI list with break after the console is full" << endl;
-    cout << "10. Exercise 4.4. - Solving quadratic equations" << endl;
-    cout << "11. Exercise 4.5. - Checking if a given number is prime" << endl;
-    cout << "0. Exit the program" << endl;
     int choise;
     while (true)
     {
+        system("cls");
+
+        cout << "Exercises for course by Karol Kuczmarski (Xion):" << endl;
+        cout << "==========================================" << endl;
+        cout << "1. Exercise 2.1. - Waiting for a character after writing a line of text" << endl;
+        cout << "2. Exercise 2.2. - Writing first name and last name in a full sentence" << endl;
+        cout << "3. Exercise 2.3. - Multiplying three number" << endl;
+        cout << "4. Exercise 3.1. - Classifying given number" << endl;
+        cout << "5. Exercise 3.2. - Numbers from 1 to 100 and their squares" << endl;
+        cout << "6. Exercise 3.3. - Guess the number game" << endl;
+        cout << "7. Exercise 4.1. - Span of int and unsigned int" << endl;
+        cout << "8. Exercise 4.2. - Sizeof for new names of short int and long int" << endl;
+        cout << "9. Exercise 4.3. - ANSI list with break after the console is full" << endl;
+        cout << "10. Exercise 4.4. - Solving quadratic equations" << endl;
+        cout << "11. Exercise 4.5. - Checking if a given number is prime" << endl;
+        cout << "12. Exercise 5.1. - Average of numbers in array" << endl;
+        cout << "13. Exercise 5.2. - Days left until the end of the year" << endl;
+        cout << "0. Exit the program" << endl;
         cout << "Your choise: ";
         cin >> choise;
         switch(choise)
         {
-            case 1: exercise_no2_1(); break;
-            case 2: exercise_no2_2(); break;
-            case 3: exercise_no2_3(); break;
-            case 4: exercise_no3_1(); break;
-            case 5: exercise_no3_2(); break;
-            case 6: exercise_no3_3(); break;
-            case 7: exercise_no4_1(); break;
-            case 8: exercise_no4_2(); break;
-            case 9: exercise_no4_3(); break;
-            case 10: exercise_no4_4(); break;
-            case 11: exercise_no4_5(); break;
+            case 1: exercise_no2_1(); getch(); break;
+            case 2: exercise_no2_2(); getch(); break;
+            case 3: exercise_no2_3(); getch(); break;
+            case 4: exercise_no3_1(); getch(); break;
+            case 5: exercise_no3_2(); getch(); break;
+            case 6: exercise_no3_3(); getch(); break;
+            case 7: exercise_no4_1(); getch(); break;
+            case 8: exercise_no4_2(); getch(); break;
+            case 9: exercise_no4_3(); getch(); break;
+            case 10: exercise_no4_4(); getch(); break;
+            case 11: exercise_no4_5(); getch(); break;
+            case 12: exercise_no5_1(); getch(); break;
+            case 13: exercise_no5_2(); getch(); break;
             case 0: return 0; break;
             default: cout << "Wrong input" << endl; break;
         }
@@ -253,5 +261,41 @@ int exercise_no4_5()
     cout << "Write a number and I will check if it is prime: ";
     cin >> nNumber;
     cout << (Prime(nNumber) ? "Your number IS prime." : "Your number IS NOT prime.") << endl;
+    return 0;
+}
+int exercise_no5_1()
+{
+    int nAmount;
+    float aNumbers[100], fSum = 0, fAverage;
+    cout << "Average from numbers in array" << endl;
+    cout << "How many numbers do you want to consider?: ";
+    cin >> nAmount;
+    for (int i = 0; i < nAmount; i++)
+    {
+        cout << "Your " << i + 1 << " number: ";
+        cin >> aNumbers[i];
+        fSum = fSum + aNumbers[i];
+    }
+    fAverage = fSum / nAmount;
+    cout << "Average = " << fAverage << endl;
+    return 0;
+}
+int exercise_no5_2()
+{
+    tm CurrentYearDay = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    tm CurrentTime = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    tm Difference = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    time_t Time = time(NULL);
+    CurrentTime = *localtime(&Time);
+    int Year = static_cast<int>(CurrentTime.tm_year + 1900);
+    if (Year % 4 == 0 && Year % 400 == 0)
+    {
+        CurrentYearDay.tm_yday = 366;
+    } else
+    {
+        CurrentYearDay.tm_yday = 365;
+    }
+    Difference.tm_yday = CurrentYearDay.tm_yday - CurrentTime.tm_yday;
+    cout << "There are " << Difference.tm_yday << " days left until the end of the year" << endl;
     return 0;
 }
